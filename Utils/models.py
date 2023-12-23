@@ -1,8 +1,15 @@
 from keras import *
 
-model = Sequential()
-model.add(layers.Dense(units=3, input_shape=[2]))
+from Utils.db import get_shoes
 
+model = Sequential()
+model.add(layers.Dense(units=3, input_shape=[6]))
+
+model.add(layers.Dense(units=64))
+model.add(layers.Dense(units=64))
+model.add(layers.Dense(units=64))
+model.add(layers.Dense(units=64))
+model.add(layers.Dense(units=64))
 model.add(layers.Dense(units=64))
 model.add(layers.Dense(units=64))
 model.add(layers.Dense(units=64))
@@ -10,13 +17,18 @@ model.add(layers.Dense(units=64))
 model.add(layers.Dense(units=1))
 model.compile(loss='mse', optimizer='adam')
 
-X_train = [(1, 3), (4, 8), (3, -2), (4, 19), (5, 25)]
-y_train = [4, 12, 1, 23, 30]
+request = get_shoes()
 
-model.fit(X_train, y_train, epochs=1000, verbose=0)
+model.fit(request["request"], request["results"], epochs=100000, verbose=0)
+
+model.save("model.h5")
 
 while True:
-    x = input("Enter a number: ")
-    y = input("Enter a number: ")
-    value = (float(x), float(y))
+    a = input("Enter a number: ")
+    b = input("Enter a number: ")
+    c = input("Enter a number: ")
+    d = input("Enter a number: ")
+    e = input("Enter a number: ")
+    f = input("Enter a number: ")
+    value = (int(a), int(b), int(c), int(d), int(e), int(f))
     print(model.predict([value]))

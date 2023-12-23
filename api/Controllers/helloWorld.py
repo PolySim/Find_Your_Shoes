@@ -1,2 +1,6 @@
+from Utils.db import get_shoes
+import flask
+
+
 def hello_world():
-    return "Hello World!"
+    return flask.jsonify(get_shoes())
